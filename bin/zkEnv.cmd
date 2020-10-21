@@ -42,9 +42,13 @@ if not defined JAVA_HOME (
 set JAVA_HOME=%JAVA_HOME:"=%
 
 if not exist "%JAVA_HOME%"\bin\java.exe (
-  echo Error: JAVA_HOME is incorrectly set.
+  echo Error: JAVA_HOME is incorrectly set: %JAVA_HOME%
+  echo Expected to find java.exe here: %JAVA_HOME%\bin\java.exe
   goto :eof
 )
 
+REM strip off trailing \ from JAVA_HOME or java does not start
+if "%JAVA_HOME:~-1%" EQU "\" set "JAVA_HOME=%JAVA_HOME:~0,-1%"
+ 
 set JAVA="%JAVA_HOME%"\bin\java
 
